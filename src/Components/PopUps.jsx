@@ -14,9 +14,13 @@ import { useDispatch } from 'react-redux';
 
 import { setCredits } from '../redux/UserSlice';
 
-function PopUps({ emailSearch,setEmailSearch, showPopUps, setshowPopUps,setSearchedResultFound }) {
+import SidebarContext from '../context/SidebarContext';
+
+function PopUps({ emailSearch,setEmailSearch, showPopUps, setshowPopUps,setSearchedResultFound,setchangeContent }) {
 
   const dispatch = useDispatch();
+
+  const { isSidebarOpen, setSidebarOpen } = useContext(SidebarContext);
 
   const { searchedUserData, setSearchedUserData } = useContext(MyContext);
 
@@ -54,30 +58,36 @@ function PopUps({ emailSearch,setEmailSearch, showPopUps, setshowPopUps,setSearc
 
       });
 
-      // console.log((response?.data)?.data.interviews);
-      
-
+    
       dispatch(setCredits(Number(data?.credits)-1));
 
       console.log("res ka data at pop ups ",response.data.data.profile);
 
       // setSearchedUserData((response?.data)?.data.interviews);
 
-      setSearchedUserData(response.data.data.profile);
+      setSearchedUserData(response?.data?.data?.profile);
 
       toast.success("data fetched successfully");
 
       setSearchedResultFound("");
 
+      setchangeContent(0);
+      
+      setSidebarOpen(true);
+
+      console.log("hellow 1")
+
       // make a call to backend to seraching the user 
 
     } catch (error) {
 
+      console.log("hellow ");
+
       setSearchedResultFound("not_found")
 
-      console.log(error.response.data.message);
+      console.log(error?.response?.data?.message);
 
-      toast.error( error.response.data.message);
+      toast.error( error?.response?.data?.message);
 
     }
     finally {
@@ -85,6 +95,10 @@ function PopUps({ emailSearch,setEmailSearch, showPopUps, setshowPopUps,setSearc
       setEmailSearch("");
 
       setLoading(false);
+
+      setchangeContent(0);
+      
+      setSidebarOpen(true);
 
     }
   }

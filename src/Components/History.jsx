@@ -8,19 +8,40 @@ import Loader from './Loader.jsx';
 
 import Pipeline from './Pipeline.jsx';
 
-import MyContext from '../context/context.jsx';
+import MyPipelineContext from '../context/context.jsx';
 
 import { useContext } from 'react';
 
-function History({ setEmailSearch, setChangeContent, setSearchedResultFound }) {
+import { MyContext } from '../context/UserContext.jsx';
+
+function History({ setEmailSearch, setchangeContent, setSearchedResultFound }) {
 
   const [loading, setLoading] = useState(true);
 
-  const { pipeline, setPipeline } = useContext(MyContext);
+  const { pipeline, setPipeline } = useContext(MyPipelineContext);
+
+  const { searchedUserData, setSearchedUserData } = useContext(MyContext);
 
   const [userHistoryData, setUserHistoryData] = useState([]);
   const data = useSelector((state) => state.user.data);
   const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL;
+
+  function viewMoreClickHandler(user){
+
+    console.log("view userdata ",user);
+
+    // setPipeline(user);
+    // setEmailSearch(user?.candidate_name);
+    // setChangeContent(0);
+
+    setSearchedUserData([user])
+
+    setchangeContent(0);
+      
+    setSidebarOpen(true);
+
+
+  }
 
   useEffect(() => {
 
@@ -31,6 +52,8 @@ function History({ setEmailSearch, setChangeContent, setSearchedResultFound }) {
       try {
         const response = await axios.get(`${backendUrl}/api/users/getUserHistoryData/${data._id}`);
         setUserHistoryData(response.data.data);
+
+        console.log("User History data ",response.data.data);
       } catch (error) {
         console.error('Error fetching history data:', error);
         toast.error(error.response?.data?.message || 'Something went wrong!');
@@ -93,11 +116,7 @@ function History({ setEmailSearch, setChangeContent, setSearchedResultFound }) {
                 <td>{Dateformatter(user.updatedAt)}</td>
                 <td>
                   <button
-                    onClick={() => {
-                      setPipeline(user);
-                      setEmailSearch(user?.candidate_name);
-                      setChangeContent(0);
-                    }}
+                    onClick={()=>viewMoreClickHandler(user)}
                     className='bg-white font-semibold text-gray-500 border-[0.5px] border-black rounded-full text-xs md:text-sm py-1 px-2'
                   >
                     View more

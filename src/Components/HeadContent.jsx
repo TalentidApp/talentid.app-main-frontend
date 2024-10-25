@@ -3,7 +3,7 @@ import { SlArrowLeft } from "react-icons/sl";
 import { IoMdSearch } from "react-icons/io";
 import PopUps from './PopUps'
 
-function HeadContent({ emailSearch, setEmailHandler, setEmailSearch,setSearchedResultFound }) {
+function HeadContent({ emailSearch, setEmailHandler, setEmailSearch,setSearchedResultFound,setchangeContent }) {
   const [showPopUps, setshowPopUps] = useState(false)
   return (
     <div className="flex flex-col gap-6  items-center w-full   mt-1 relative ">
@@ -17,6 +17,7 @@ function HeadContent({ emailSearch, setEmailHandler, setEmailSearch,setSearchedR
           showPopUps={showPopUps}
           setshowPopUps={setshowPopUps}
           setSearchedResultFound ={setSearchedResultFound}
+          setchangeContent = {setchangeContent}
           
         />
 

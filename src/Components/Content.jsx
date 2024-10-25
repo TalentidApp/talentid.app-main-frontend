@@ -10,9 +10,14 @@ import { MyContext } from '../context/UserContext';
 
 import NotFoundPage from "../Components//common/NotFoundPage";
 
+import SidebarContext from '../context/SidebarContext';
+
 function Content({ changeContent, setchangeContent }) {
 
   const { pipeline } = useContext(MyContexts);
+
+  const { isSidebarOpen, setSidebarOpen } = useContext(SidebarContext);
+
   const [emailSearch, setEmailSearch] = useState("");
 
   const [searchedResultFound,setSearchedResultFound] = useState("");
@@ -29,7 +34,7 @@ function Content({ changeContent, setchangeContent }) {
 
     console.log("searched user data in content",searchedUserData);
 
-  },[searchedUserData,pipeline]);
+  },[changeContent,isSidebarOpen,searchedUserData,pipeline,searchedResultFound]);
 
   return (
     <div className="flex-1 p-4 pt-[140px] lg:pl-[50px] lg:pr-[90px] flex flex-col gap-10 h-full overflow-x-hidden overflow-y-hidden">
@@ -40,6 +45,7 @@ function Content({ changeContent, setchangeContent }) {
         setEmailHandler={handleEmailChange}
         setEmailSearch={setEmailSearch}
         setSearchedResultFound ={setSearchedResultFound}
+        setchangeContent = {setchangeContent}
 
       />
 

@@ -13,6 +13,9 @@ import axios from "axios";
 
 import BuyCredits from "../pages/BuyCredits";
 
+import { RxDragHandleHorizontal } from "react-icons/rx";
+
+
 function Profile() {
   const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL;
   const navigate = useNavigate();
@@ -60,9 +63,8 @@ function Profile() {
       {loading && <Loader />}
       {/* Left - Sidebar */}
       <div
-        className={`lg:w-1/4 md:static flex flex-col gap-8 py-8 pl-5 pr-10 h-full w-[300px] transition-all duration-200 bg-white shadow-lg z-10 ${
-          sideProfileMenu ? "absolute left-0" : "absolute left-[-300px]"
-        } lg:relative lg:left-0`}
+        className={`lg:w-1/4 md:static flex flex-col gap-8 py-8 pl-5 pr-10 h-full w-[300px] transition-all duration-200 bg-white shadow-lg z-10 ${sideProfileMenu ? "absolute left-0" : "absolute left-[-300px]"
+          } lg:relative lg:left-0`}
       >
         <img
           src="/assets/talentid_logo_white.png"
@@ -74,11 +76,10 @@ function Profile() {
         <div className="h-[1px] w-full bg-gray-300"></div>
         <div className="flex flex-col gap-4 text-gray-600 font-semibold">
           <div
-            className={`cursor-pointer flex items-center gap-3 border rounded-full py-2 px-4 bg-white text-gray-700 hover:bg-purple-300 hover:text-white transition-colors duration-300 cursor-pointer shadow-md ${
-              content === "home"
-                ? "bg-purple-100 text-purple-600"
-                : "hover:bg-gray-100 text-purple-600"
-            }`}
+            className={`cursor-pointer flex items-center gap-3 border rounded-full py-2 px-4 bg-white text-gray-700 hover:bg-purple-300 hover:text-white transition-colors duration-300 cursor-pointer shadow-md ${content === "home"
+              ? "bg-purple-100 text-purple-600"
+              : "hover:bg-gray-100 text-purple-600"
+              }`}
             onClick={() => {
               setContent("home");
               setSideProfileMenu(false);
@@ -87,11 +88,10 @@ function Profile() {
             Home
           </div>
           <div
-            className={`cursor-pointer py-2 px-4 rounded-md ${
-              content === "settings"
-                ? "bg-purple-100 text-purple-600"
-                : "hover:bg-gray-100"
-            }`}
+            className={`cursor-pointer py-2 px-4 rounded-md ${content === "settings"
+              ? "bg-purple-100 text-purple-600"
+              : "hover:bg-gray-100"
+              }`}
             onClick={() => {
               setContent("settings");
               setSideProfileMenu(false);
@@ -100,11 +100,10 @@ function Profile() {
             About
           </div>
           <div
-            className={`cursor-pointer py-2 px-4 rounded-md ${
-              content === "about"
-                ? "bg-purple-100 text-purple-600"
-                : "hover:bg-gray-100"
-            }`}
+            className={`cursor-pointer py-2 px-4 rounded-md ${content === "about"
+              ? "bg-purple-100 text-purple-600"
+              : "hover:bg-gray-100"
+              }`}
             onClick={() => {
               setContent("about");
               setSideProfileMenu(false);
@@ -145,19 +144,26 @@ function Profile() {
       <div className="lg:w-3/4 flex flex-col gap-6 p-8 bg-white rounded-md shadow-xl overflow-y-auto w-full">
         <div className="flex items-center gap-6">
           <img
-            className="h-24 w-24 rounded-full object-cover shadow-md"
+            className=" h-16 w-16 md:h-24 md:w-24 rounded-full object-cover shadow-md"
             src={userData?.userImage}
             alt="Profile"
           />
           <div className="flex flex-col gap-1">
+
             <p className="text-2xl font-bold flex items-center gap-2 text-gray-800">
               {userData?.fullname}
               <BsPencilFill
                 className="cursor-pointer text-purple-600"
-                onClick={() => setSideProfileMenu(!sideProfileMenu)}
               />
             </p>
             <p className="text-gray-500">{userData?.email}</p>
+
+            <div className="absolute top-10 sm:top-16 right-5 sm:right-9 text-3xl block cursor-pointer md:hidden" onClick={() => setSideProfileMenu(!sideProfileMenu)}>
+
+              <RxDragHandleHorizontal></RxDragHandleHorizontal>
+
+            </div>
+
           </div>
         </div>
         {/* Render Content */}

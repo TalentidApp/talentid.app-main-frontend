@@ -42,7 +42,7 @@ function Headre() {
 
         </div>
 
-        <Link to='/profile'><img className="rounded-full hidden md:block w-[30px] h-[30px] object-cover border-[1px] border-customPurple md:w-[50px] md:h-[50px]" src={userData?.userImage} alt="" /> </Link>
+        <Link to='/profile'><img className="rounded-full hidden md:block w-[30px] h-[30px] object-cover border-[1px] bg-purple-400 border-customPurple md:w-[50px] md:h-[50px]" src={userData?.userImage} alt="" /> </Link>
 
       </div>
 

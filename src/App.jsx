@@ -17,6 +17,8 @@ import axios from "axios";
 
 import BuyCredits from "./pages/BuyCredits";
 
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+
 function App() {
 
   // useEffect(()=>{
@@ -47,6 +49,8 @@ function App() {
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>}/>
           <Route path="/signup" element={<PublicRoute><SignUp/></PublicRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
+
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* <Route path="/" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
