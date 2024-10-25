@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
+import { userRole } from '../data/users';
+
 function SignUp() {
 
   const backendUrl = import.meta.env.VITE_REACT_BACKEND_URL;
@@ -18,12 +20,14 @@ function SignUp() {
     fullname: "",
     email: "",
     phone: "",
-    company: "talenid",
-    role: "User",
+    company: "",
+    role: "",
     password: ""
   });
 
   function changeHandler(event) {
+
+    console.log(event.target.value);
     setSignupData({ ...signupData, [event.target.name]: event.target.value });
   }
 
@@ -35,8 +39,20 @@ function SignUp() {
         const response = await axios.post(`${backendUrl}/api/users/signup`, signupData);
         toast.success("Successfully signed up");
       } catch (error) {
-        toast.error(error.response.data.message);
+
+        console.log(error);
+        toast.error(error?.response?.data?.message);
       } finally {
+
+        signupData.fullname = "";
+        signupData.email = "";
+
+        signupData.phone = "";
+
+        signupData.company = "";
+
+        signupData.password = "";
+
         setLoading(false);
       }
     }, 5000);
@@ -119,9 +135,16 @@ function SignUp() {
                 value={signupData.role}
                 onChange={changeHandler}
               >
-                <option value="HR">HR</option>
-                <option value="User">User</option>
-                <option value="Cn">Candidate</option>
+
+                {
+
+                  userRole.map((data)=>{
+
+                    return <option value={data}>{data}</option>
+
+                  })
+                }
+               
               </select>
             </div>
 

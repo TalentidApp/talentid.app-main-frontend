@@ -26,6 +26,17 @@ export const InterViewStatusUser = {
 };
 
 
+export const userRole = [
+
+  "recruitmentFirms",
+
+  "HRE",
+
+  "Recruiters"
+
+]
+
+
 export const additionalDetailsData = [
   { key: "address", label: "Address", defaultValue: "123 Main St" },
   { key: "gender", label: "Gender", defaultValue: "Male" },
@@ -44,19 +55,19 @@ export const dummyDataCredit = [
     "name": "Starter",
     "price": 5000,
     "credits": 100,
-    "features": ["Onboarding support","Custom integrations", "Priority Customer Support"]
+    "features": ["Onboarding support", "Custom integrations", "Priority Customer Support"]
   },
   {
     "name": "Business",
     "price": 50000,
     "credits": 12000,
-    "features": ["Onboarding support","Custom integrations", "Priority Customer Support"]
+    "features": ["Onboarding support", "Custom integrations", "Priority Customer Support"]
   },
   {
     "name": "Custom",
     "price": "Custom",
     "credits": "Unlimited",
-    "features": ["Onboarding support","Custom integrations", "Dedicated Account Manager", "Early Access to new features"]
+    "features": ["Onboarding support", "Custom integrations", "Dedicated Account Manager", "Early Access to new features"]
   }
 ]
 
