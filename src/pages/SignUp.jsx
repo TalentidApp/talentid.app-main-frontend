@@ -22,7 +22,9 @@ function SignUp() {
     phone: "",
     company: "",
     role: "",
-    password: ""
+    password: "",
+    termsAndConditions:false,
+
   });
 
   function changeHandler(event) {
@@ -33,6 +35,14 @@ function SignUp() {
 
   async function submitHandler() {
     setLoading(true);
+
+    if(!signupData.termsAndConditions){
+
+      toast.error("plz allow terms and conditions");
+
+      return ;
+
+    }
 
     setTimeout(async () => {
       try {
@@ -56,6 +66,17 @@ function SignUp() {
         setLoading(false);
       }
     }, 5000);
+  }
+
+  async function checkHandler(event){
+
+    const { checked } = event.target;
+    // Update the state with the new value
+    setSignupData((prevData) => ({
+      ...prevData,
+      [event.target.name]: checked,
+    }));
+
   }
 
   return (
@@ -138,13 +159,13 @@ function SignUp() {
 
                 {
 
-                  userRole.map((data)=>{
+                  userRole.map((data) => {
 
                     return <option value={data}>{data}</option>
 
                   })
                 }
-               
+
               </select>
             </div>
 
@@ -169,14 +190,24 @@ function SignUp() {
           </div>
 
           {/* Submit Button */}
-          <div className='flex flex-col items-center gap-4'>
+          <div className='flex flex-col justify-start items-start gap-4'>
+
+
+            <div className='flex justify-center items-center gap-2' onClick={checkHandler}>
+
+              <input type='checkbox' name='termsAndConditions' value={signupData.termsAndConditions}></input>
+              <p className='text-purple-700 '>Terms and condition </p>
+
+            </div>
+
             <button
               className='w-full bg-purple-600 text-white py-4 rounded-lg font-bold shadow-md hover:bg-purple-700 transition-all'
               onClick={submitHandler}
             >
               Create Account
             </button>
-            <Link to="/login" className='text-purple-600 hover:underline lg:hidden'>
+
+            <Link to="/login" className='text-purple-600  hover:underline lg:hidden'>
               Already have an account? Log in
             </Link>
           </div>
